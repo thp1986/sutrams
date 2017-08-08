@@ -30,13 +30,15 @@
                                              cNOD, cELE, cOBS, &
                                              cTBC, cGTP, &
                                              cOTM, cATS, cZON, cSOB, &
-                                             cTPN, cTPE  !VERSION 1.1
+                                             cTPN, cTPE, &  !VERSION 1.1
+											 cBUD  !VERSION 1.1
         INTEGER (I4B)                     :: fSMY, fSutraFil
         INTEGER (I4B)                     :: fINP, fICS, fLST, fRST
         INTEGER (I4B)                     :: fNOD, fELE, fOBS
         INTEGER (I4B)                     :: fTBC, fGTP
         INTEGER (I4B)                     :: fOTM, fATS, fZON, fSOB
         INTEGER (I4B)                     :: fTPN, fTPE  !VERSION 1.1
+        INTEGER (I4B)                     :: fBUD  !VERSION 1.1		
         INTEGER (I4B), PARAMETER          :: NKFLE=20
         INTEGER (I4B)                     :: n_onunit=19
         PUBLIC  :: &
@@ -47,9 +49,11 @@
                 cNOD, cELE, cOBS, &
                 cTBC, cGTP, &
                 cOTM, cATS, cZON, cSOB, &
+				cBUD, &
                 fSMY,fSutraFil,&
                 fINP,fICS,fLST,fRST,fNOD,fELE,fOBS,&
                 fTBC,fGTP,fOTM,fATS,fZON,fSOB, &
+				fBUD, &
                 NKFLE, &
                 n_onunit, &
                 FindOpenUnit, &
@@ -57,6 +61,7 @@
                 CloseFormattedFile
         contains
           integer function FindOpenUnit()
+            logical :: lOpened				!MT: added due to error during compiling with gfortran
             !find open file unit
             l_onunit=.true.
             do while (l_onunit)
